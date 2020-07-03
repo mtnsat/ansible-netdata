@@ -99,18 +99,7 @@
 	# max URL name length = 50
 
 [backend]
-{% if not netdata_configure_archive %}
-	# enabled = no
-	# data source = average
-	# type = graphite
-	# destination = localhost
-	# prefix = netdata
-	hostname = {{ netdata_hostname }}
-	# update every = 10
-	# buffer on failures = 10
-	# timeout ms = 20000
-
-{% elif netbot_netdata_configure_archive %}
+{% if netbot_netdata_configure_archive %}
         enabled = {{ netdata_archive_enabled }}
         type = {{ netdata_archive_type }}
         destination = {{ netdata_archive_destination }}
@@ -124,7 +113,16 @@
         send charts matching = {{ netdata_archive_charts }}
         #send charts matching = !*packets* !*drops* *tap1.986* *tap2.986* *DSCP* *.default* !*
         # send hosts matching = localhost *
-
+{% elif not netdata_configure_archive %}
+	# enabled = no
+	# data source = average
+	# type = graphite
+	# destination = localhost
+	# prefix = netdata
+	hostname = {{ netdata_hostname }}
+	# update every = 10
+	# buffer on failures = 10
+	# timeout ms = 20000
 {% else %}
 	enabled = {{ netdata_archive_enabled }}
 	type = {{ netdata_archive_type }}
