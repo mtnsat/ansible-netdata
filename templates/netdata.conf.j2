@@ -110,7 +110,7 @@
 	# buffer on failures = 10
 	# timeout ms = 20000
 
-{% else if netbot_netdata_configure_archive %}
+{% elif netbot_netdata_configure_archive %}
         enabled = {{ netdata_archive_enabled }}
         type = {{ netdata_archive_type }}
         destination = {{ netdata_archive_destination }}
